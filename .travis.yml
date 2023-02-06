@@ -1,9 +1,18 @@
-language: node_js
-node_js:
-  - "8"
-script:
-  - echo 'Build starts!!'
-  - echo 'Installing Deps!'
-  - npm
-  - echo 'Testing!'
-  - npm run test:prod
+name: Travis CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  travis-ci:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run Travis CI
+      uses: dblock/action-travis-cli@v1
+      with:
+        args: ci
